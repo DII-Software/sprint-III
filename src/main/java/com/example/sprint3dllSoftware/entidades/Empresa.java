@@ -1,22 +1,37 @@
 package com.example.sprint3dllSoftware.entidades;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Empresa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
+    @Column(name = "nombreEmpresa", length = 50)
     protected String NombreEmpresa;
+    @Column(name = "direccionEmpresa", length = 50)
     protected String DireccionEmpresa;
+    @Column(name = "numeroTelefono", length = 10)
     protected String NumeroDeTelefono;
-    protected String IdEmpresa;
 
 
-    public Empresa(String nombreEmpresa, String direccionEmpresa, String numeroDeTelefono, String idEmpresa) {
+
+    public Empresa(int id, String nombreEmpresa, String direccionEmpresa, String numeroDeTelefono) {
+        id = id;
         NombreEmpresa = nombreEmpresa;
         DireccionEmpresa = direccionEmpresa;
         NumeroDeTelefono = numeroDeTelefono;
-        IdEmpresa = idEmpresa;
     }
 
     public Empresa() {
     }
 
+    public int  getIdEmpresa() {return id;}
+    public void setIdEmpresa(int id) {
+        id = id;
+    }
     public String getNombreEmpresa() {
         return NombreEmpresa;
     }
@@ -41,11 +56,4 @@ public class Empresa {
         NumeroDeTelefono = numeroDeTelefono;
     }
 
-    public String getIdEmpresa() {
-        return IdEmpresa;
-    }
-
-    public void setIdEmpresa(String idEmpresa) {
-        IdEmpresa = idEmpresa;
-    }
 }

@@ -1,14 +1,35 @@
 package com.example.sprint3dllSoftware.entidades;
+
+import javax.annotation.processing.Generated;
+import javax.persistence.*;
+
+@Entity
+@Table
 public class User {
+
+    @Id
+    @Column(name = "id_user")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int idUser;
     public String username;
     public String email;
     public String password;
 
-
-    public User(String username, String email, String password) {
+    public User(int idUser, String username, String email, String password) {
+        this.idUser = idUser;
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+    public User() {
+    }
+
+    public int getId_user() {
+        return idUser;
+    }
+
+    public void setId_user(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getUsername() {
@@ -34,5 +55,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

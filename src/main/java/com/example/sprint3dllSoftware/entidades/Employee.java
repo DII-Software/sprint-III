@@ -1,10 +1,8 @@
 package com.example.sprint3dllSoftware.entidades;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="Employee")
@@ -12,15 +10,21 @@ import javax.persistence.Table;
 public class Employee {
     //Atributos
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEmpleado;
     @Column (nullable = false, length = 60)
     private String nombre;
     @Column (nullable = false, length = 30, unique = true)
     private String correo;
-    @Column (nullable = false, length = 30)
-    private Empresa empresa;
-    @Column(nullable = false, length = 30)
-    private RolEmp rol;
+    @ManyToOne
+        @JoinColumn(name = "id_empresa")
+        Empresa empresa;
+    @ManyToOne
+        @JoinColumn(name = "id_rol")
+        RolEmp rol;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions;
 
     //Constructor
 

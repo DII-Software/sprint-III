@@ -2,27 +2,34 @@ package com.example.sprint3dllSoftware.entidades;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
 public class Transaction {
     @Id
+    @Column(name = "id_transaction")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    public long idTransaction;
     public String concept;
     public float amount;
-    public User user;
-    public Empresa empresa;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_employee")
+    private Employee employee;
+
+    @OneToMany(mappedBy = "transaction",cascade = CascadeType.ALL)
+    private List<Empresa> empresa;
     @Column(name = "created_at")
     public Date createdAt;
     @Column(name = "updated_at")
     public Date updatedAt;
 
-    public Transaction(long id, String concept, float amount, User user, Empresa empresa, Date createdAt, Date updatedAt) {
-        this.id = id;
+    public Transaction(long idTransaction, String concept, float amount, List<Employee> employee, List<Empresa> empresa, Date createdAt, Date updatedAt) {
+        this.idTransaction = idTransaction;
         this.concept = concept;
         this.amount = amount;
-        this.user = user;
+        this.employee = employee;
         this.empresa = empresa;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -31,12 +38,12 @@ public class Transaction {
     public Transaction() {
     }
 
-    public long getId() {
-        return id;
+    public long getIdTransaction() {
+        return idTransaction;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdTransaction(long idTransaction) {
+        this.idTransaction = idTransaction;
     }
 
     public String getConcept() {
@@ -55,19 +62,19 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public User getUser() {
-        return user;
+    public List<Employee> getemployee() {
+        return employee;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setemployee(List<Employee> employee) {
+        this.employee = employee;
     }
 
-    public Empresa getEmpresa() {
+    public List<Empresa> getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(List<Empresa> empresa) {
         this.empresa = empresa;
     }
 
