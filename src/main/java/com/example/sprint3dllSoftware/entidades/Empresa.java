@@ -1,6 +1,7 @@
 package com.example.sprint3dllSoftware.entidades;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -15,6 +16,10 @@ public class Empresa {
     protected String DireccionEmpresa;
     @Column(name = "numeroTelefono", length = 10)
     protected String NumeroDeTelefono;
+
+    //Una empresa puede tener muchos empleados
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employees;
 
 
 

@@ -1,6 +1,7 @@
 package com.example.sprint3dllSoftware.entidades;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -10,6 +11,12 @@ public class RolEmp {
     public long id;
     @Column(name = "tipo", length = 20)
     public String tipo;
+
+    //Un rol puede asociarse a muchos empleados
+    @JoinColumn(name="employee_id")
+    @OneToMany(mappedBy = "rolEmp", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employees;
+
     public RolEmp(long id, String tipo) {
         this.id = id;
         this.tipo = tipo;

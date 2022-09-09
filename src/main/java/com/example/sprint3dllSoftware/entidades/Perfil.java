@@ -19,6 +19,13 @@ public class Perfil {
     public Date createdAt;
     @Column(name = "updated_at")
     public Date UpdatedAt;
+
+    //Un perfil solo debe asociarse a un empleado
+    @JoinColumn(name = "employee_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    private Employee employee;
+
+
     public Perfil(int id, String image, String phone, String user, Date createdAt, Date updatedAt) {
         this.id = id;
         this.image = image;
