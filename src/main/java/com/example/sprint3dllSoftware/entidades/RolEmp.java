@@ -13,7 +13,6 @@ public class RolEmp {
     public String tipo;
 
     //Un rol puede asociarse a muchos empleados
-    @JoinColumn(name="employee_id")
     @OneToMany(mappedBy = "rol_empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Employee> employees;
 

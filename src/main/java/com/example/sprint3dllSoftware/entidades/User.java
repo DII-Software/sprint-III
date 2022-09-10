@@ -16,8 +16,8 @@ public class User {
     public String password;
 
     //Un usuario solo debe asociarse a un empleado
-    @JoinColumn(name = "employee_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Employee employee;
 
     public User(int idUser, String username, String email, String password) {

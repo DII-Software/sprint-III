@@ -5,8 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="Employee")
-
+@Table(name="employee")
 public class Employee {
     //Atributos
     @Id
@@ -29,7 +28,7 @@ public class Employee {
 
     //Los empleados solo pueden asociarse a un rol
     @ManyToOne()
-    @JoinColumn(name = "rolEmp_id")
+    @JoinColumn(name = "rolemp_id")
     private RolEmp rolEmp;
 
     //Los empleados deben pertener a una empresa
@@ -38,11 +37,15 @@ public class Employee {
     private Employee employee;
 
     //Un empleado solo debe tener un usr
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
     private User user;
 
     //Un empleado solo debe tener un perfil
-    @OneToOne(mappedBy = "perfil", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "perfil_id")
     private Perfil perfil;
 
 

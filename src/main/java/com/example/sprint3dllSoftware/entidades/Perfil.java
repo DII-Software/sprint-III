@@ -21,8 +21,8 @@ public class Perfil {
     public Date UpdatedAt;
 
     //Un perfil solo debe asociarse a un empleado
-    @JoinColumn(name = "employee_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "perfil", cascade = CascadeType.ALL, orphanRemoval = true)
+    @PrimaryKeyJoinColumn
     private Employee employee;
 
 
