@@ -40,6 +40,6 @@ public class ControladorEmpresa {
 
     @DeleteMapping
     public void eliminar(@RequestBody Empresa empr){
-        siee.eliminarEmpresa(empr.getIdEmpresa());
+        siee.eliminarEmpresa(empr.getId(empr));
     }
 }

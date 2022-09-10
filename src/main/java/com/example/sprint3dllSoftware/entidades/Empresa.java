@@ -21,22 +21,29 @@ public class Empresa {
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Employee> employees;
 
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+            private List<Transaction> transaction;
 
-
-    public Empresa(int id, String nombreEmpresa, String direccionEmpresa, String numeroDeTelefono) {
-        id = id;
+    public Empresa(int id, String nombreEmpresa, String direccionEmpresa, String numeroDeTelefono, List<Employee> employees, List<Transaction> transaction) {
+        this.id = id;
         NombreEmpresa = nombreEmpresa;
         DireccionEmpresa = direccionEmpresa;
         NumeroDeTelefono = numeroDeTelefono;
+        this.employees = employees;
+        this.transaction = transaction;
     }
 
     public Empresa() {
     }
 
-    public int  getIdEmpresa() {return id;}
-    public void setIdEmpresa(int id) {
-        id = id;
+    public int getId(Empresa empr) {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNombreEmpresa() {
         return NombreEmpresa;
     }
@@ -61,4 +68,19 @@ public class Empresa {
         NumeroDeTelefono = numeroDeTelefono;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Transaction> getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(List<Transaction> transaction) {
+        this.transaction = transaction;
+    }
 }

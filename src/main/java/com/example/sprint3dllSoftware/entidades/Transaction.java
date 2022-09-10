@@ -18,14 +18,15 @@ public class Transaction {
     @JoinColumn(name = "id_employee")
     private Employee employee;
 
-    @OneToMany(mappedBy = "transaction",cascade = CascadeType.ALL)
-    private List<Empresa> empresa;
+    @ManyToOne()
+    @JoinColumn(name="id_empresa")
+    private Empresa empresa;
     @Column(name = "created_at")
     public Date createdAt;
     @Column(name = "updated_at")
     public Date updatedAt;
 
-    public Transaction(long idTransaction, String concept, float amount, List<Employee> employee, List<Empresa> empresa, Date createdAt, Date updatedAt) {
+    public Transaction(long idTransaction, String concept, float amount, Employee employee, Empresa empresa, Date createdAt, Date updatedAt) {
         this.idTransaction = idTransaction;
         this.concept = concept;
         this.amount = amount;
@@ -62,19 +63,19 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public List<Employee> getemployee() {
+    public Employee getEmployee() {
         return employee;
     }
 
-    public void setemployee(List<Employee> employee) {
+    public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 
-    public List<Empresa> getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(List<Empresa> empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 

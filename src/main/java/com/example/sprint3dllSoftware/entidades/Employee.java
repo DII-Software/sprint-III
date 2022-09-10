@@ -18,10 +18,10 @@ public class Employee {
     private String correo;
     @ManyToOne
         @JoinColumn(name = "id_empresa")
-        Empresa empresa;
+        private Empresa empresa;
     @ManyToOne
         @JoinColumn(name = "id_rol")
-        RolEmp rol;
+        private RolEmp rol;
 
     //un empleado puede hacer muchas transacciones
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
