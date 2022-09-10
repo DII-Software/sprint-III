@@ -16,11 +16,12 @@ public class Employee {
     @Column (nullable = false, length = 30, unique = true)
     private String correo;
     @ManyToOne
-        @JoinColumn(name = "id_empresa")
-        private Empresa empresa;
-    @ManyToOne
-        @JoinColumn(name = "id_rol")
-        private RolEmp rol;
+    @JoinColumn(name = "id_empresa")
+    private Empresa empresa;
+
+    //@ManyToOne
+    //@JoinColumn(name = "id_rol")
+    //private RolEmp rol;
 
     //un empleado puede hacer muchas transacciones
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -28,7 +29,7 @@ public class Employee {
 
     //Los empleados solo pueden asociarse a un rol
     @ManyToOne()
-    @JoinColumn(name = "rolemp_id")
+    @JoinColumn(name = "rolEmp_id")
     private RolEmp rolEmp;
 
     //Los empleados deben pertener a una empresa
@@ -52,12 +53,12 @@ public class Employee {
     //Constructor
 
 
-    public Employee(Integer idEmpleado, String nombre, String correo, Empresa empresa, RolEmp rol) {
+    public Employee(Integer idEmpleado, String nombre, String correo, Empresa empresa,RolEmp rolEmp ) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
-        this.rol = rol;
+        this.rolEmp= rolEmp;
     }
 
     public Employee() {
@@ -83,8 +84,8 @@ public class Employee {
         return empresa;
     }
 
-    public RolEmp getRol() {
-        return rol;
+    public RolEmp getRolEmp() {
+        return rolEmp;
     }
 
     //Setters
@@ -106,8 +107,8 @@ public class Employee {
         this.empresa = empresa;
     }
 
-    public void setRol(RolEmp rol) {
-        this.rol = rol;
+    public void setRolEmp(RolEmp rolEmp) {
+        this.rolEmp = rolEmp;
     }
 };
 

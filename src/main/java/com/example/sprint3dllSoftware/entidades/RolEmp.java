@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "rol_empleado")
+@Table(name = "rolEmp")
 public class RolEmp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class RolEmp {
     public String tipo;
 
     //Un rol puede asociarse a muchos empleados
-    @OneToMany(mappedBy = "rol_empleado", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "rolEmp", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Employee> employees;
 
     public RolEmp(long id, String tipo) {
