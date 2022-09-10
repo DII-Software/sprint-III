@@ -18,6 +18,11 @@ public class ServicioImpEmployee implements ServicioEmployee {
     private RepositorioEmployee repositorioEmployee;
 
     @Override
+    public List<Employee> listarEmployee() {
+        return repositorioEmployee.findAll();
+    }
+
+    @Override
     public Employee guardarEmployee (Employee employee){
         return repositorioEmployee.save(employee);
     }
@@ -38,22 +43,7 @@ public class ServicioImpEmployee implements ServicioEmployee {
 
     }
 
-    @Override
-    public List<Employee> listarEmployee() {
-        return repositorioEmployee.findAll();
-    }
 
-    @Override
-    public Employee actualizarPorId(Integer doc, Map<Object, Object> objectMap){
-        Employee emp=repositorioEmployee.findById(doc).get();
-        objectMap.forEach((key, value)->{
-            Field field= ReflectionUtils.findField(Employee.class, (String) key);
-            field.setAccessible(true);
 
-            ReflectionUtils.setField(field, emp, value);
-
-        });
-        return repositorioEmployee.save(emp);
-        }
 
 }
