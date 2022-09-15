@@ -40,6 +40,10 @@ public class Empresa {
         return id;
     }
 
+    public int getIdVoid() {
+        return id;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

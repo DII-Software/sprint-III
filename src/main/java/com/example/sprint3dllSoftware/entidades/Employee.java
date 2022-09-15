@@ -10,18 +10,26 @@ public class Employee {
     //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_empleado")
     private Integer idEmpleado;
-    @Column (nullable = false, length = 60)
+    @Column(nullable = false, length = 60)
     private String nombre;
-    @Column (nullable = false, length = 30, unique = true)
+    @Column(nullable = false, length = 30, unique = true)
     private String correo;
+
+    @Column(nullable = false, length = 20, unique = true)
+    private String username;
+
+    @Column(nullable = false, length = 10)
+    private String password;
+
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
-    //@ManyToOne
-    //@JoinColumn(name = "id_rol")
-    //private RolEmp rol;
+    @ManyToOne
+    @JoinColumn(name = "id_rol")
+    private RolEmp rol;
 
     //un empleado puede hacer muchas transacciones
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -37,37 +45,23 @@ public class Employee {
     @JoinColumn(name = "empresa_id")
     private Employee employee;
 
-    //Un empleado solo debe tener un usr
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    //Un empleado solo debe tener un perfil
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "perfil_id")
-    private Perfil perfil;
-
-
     //Constructor
-
-
-    public Employee(Integer idEmpleado, String nombre, String correo, Empresa empresa,RolEmp rolEmp ) {
+    public Employee(Integer idEmpleado, String nombre, String correo, Empresa empresa,RolEmp rolEmp, String username, String password) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
         this.rolEmp= rolEmp;
+        this.password = password;
+        this.username = username;
+
     }
 
+    //Constructor vacío
     public Employee() {
-
     }
 
     //Getters
-
-
     public Integer getIdEmpleado() {
         return idEmpleado;
     }
@@ -88,9 +82,12 @@ public class Employee {
         return rolEmp;
     }
 
+    public String getUsername() {return username;}
+    public String getPassword() {
+        return password;
+    }
+
     //Setters
-
-
     public void setIdEmpleado(Integer idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
@@ -109,6 +106,12 @@ public class Employee {
 
     public void setRolEmp(RolEmp rolEmp) {
         this.rolEmp = rolEmp;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 };
 
