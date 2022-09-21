@@ -19,6 +19,9 @@ public class Empresa {
     @Column(name = "nit", length = 15)
     protected long Nit;
 
+    @Column(name = "nit", length = 15)
+    protected long Nit;
+
     //Una empresa puede tener muchos empleados
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Employee> employees;

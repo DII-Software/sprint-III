@@ -28,8 +28,7 @@ public class ControladorEmpresa {
         return siee.consultarEmpresaPorId(idemp);
     }
 
-    @PostMapping
-    public Empresa insertar(@RequestBody Empresa empr){
+    @PostMapping public Empresa insertar(@RequestBody Empresa empr){
         return siee.guardarEmpresa(empr);
     }
 
