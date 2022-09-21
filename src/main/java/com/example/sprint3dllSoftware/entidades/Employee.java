@@ -27,9 +27,9 @@ public class Employee {
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
-    @ManyToOne
-    @JoinColumn(name = "id_rol")
-    private RolEmp rol;
+//    @ManyToOne
+//    @JoinColumn(name = "id_rol")
+//    private RolEmp rol;
 
     //un empleado puede hacer muchas transacciones
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -41,23 +41,21 @@ public class Employee {
     private RolEmp rolEmp;
 
     //Los empleados deben pertener a una empresa
-    @ManyToOne()
-    @JoinColumn(name = "empresa_id")
-    private Employee employee;
+//    @ManyToOne()
+//    @JoinColumn(name = "empresa_id")
+//    private Employee employee;
 
     //Constructor
-    public Employee(Integer idEmpleado, String nombre, String correo, Empresa empresa,RolEmp rolEmp, String username, String password) {
+    public Employee(Integer idEmpleado, String nombre, String correo, String username, String password, Empresa empresa, RolEmp rolEmp, List<Transaction> transactions) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.correo = correo;
-        this.empresa = empresa;
-        this.rolEmp= rolEmp;
-        this.password = password;
         this.username = username;
-
+        this.password = password;
+        this.empresa = empresa;
+        this.rolEmp = rolEmp;
+        this.transactions = transactions;
     }
-
-    //Constructor vacío
     public Employee() {
     }
 
@@ -74,17 +72,24 @@ public class Employee {
         return correo;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public Empresa getEmpresa() {
         return empresa;
     }
 
-    public RolEmp getRolEmp() {
+    public RolEmp getRol() {
         return rolEmp;
     }
 
-    public String getUsername() {return username;}
-    public String getPassword() {
-        return password;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
     //Setters
@@ -100,18 +105,23 @@ public class Employee {
         this.correo = correo;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
-    public void setRolEmp(RolEmp rolEmp) {
+    public void setRol(RolEmp rolEmp) {
         this.rolEmp = rolEmp;
     }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-};
 
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+}
