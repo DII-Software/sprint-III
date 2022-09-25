@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  <title>Lista de Empresas - Ciclo3</title>
+  <title>Lista de Empleados - Ciclo3</title>
   <style>
     a{
       color:white;
@@ -22,15 +22,15 @@
 <body>
 
 <div class="container">
-  <h1> Lista de Empresas</h1>
+  <h1> Lista de Empleados</h1>
   <!--Dibujamos la tabla-->
   <br><table class="table table-bordered">
   <tr>
     <th>ID</th>
     <th>Nombre</th>
-    <th>Dirección</th>
-    <th>Telefono</th>
-    <th>NIT</th>
+    <th>Correo</th>
+    <th>User</th>
+    <th>Password</th>
     <th>Editar</th>
     <th>Eliminar</th>
 
@@ -38,20 +38,20 @@
 
   <!--Llenamos la tabla dibujada-->
   <!--En nuestro controller, creamos en viewEmpresa un modelo con un atributo llamado emplist donde esta guardada la lista de todas las empresas-->
-  <tr th:each="empresa : ${emprlist}">
-    <td th:text="${empresa.id}"></td>
-    <td th:text="${empresa.nombre}"></td>
-    <td th:text="${empresa.direccion}"></td>
-    <td th:text="${empresa.telefono}"></td>
-    <td th:text="${empresa.NIT}"></td>
+  <tr th:each="empresa : ${emplist}">
+    <td th:text="${employee.id}"></td>
+    <td th:text="${employee.nombre}"></td>
+    <td th:text="${employee.correo}"></td>
+    <td th:text="${employee.user}"></td>
+    <td th:text="${employee.password}"></td>
 
-    <td><button type="button" class="btn btn-warning"><a th:href="@{/EditarEmpresa/{id}(id=${empresa.id})}">Editar</a></button></td>
-    <td><button type="button" class="btn btn-danger"><a th:href="@{/EliminarEmpresa/{id}(id=${empresa.id})}">Eliminar</a></button></td>
+    <td><button type="button" class="btn btn-warning"><a th:href="@{/actualizarEmployee/{id}(id=${employee.id})}">Editar</a></button></td>
+    <td><button type="button" class="btn btn-danger"><a th:href="@{/eliminarEmployee/{id}(id=${employee.id})}">Eliminar</a></button></td>
   </tr>
 </table>
 
   <!-- vamos a crear un boton que sirva para agregar nuevas empresas -->
-  <button type="button" class="btn btn-info"><a th:href="@{/AgregarEmpresa}">Agregar Nueva Empresa</a></button>
+  <button type="button" class="btn btn-info"><a th:href="@{/guardarEmployee}">Agregar Nuevo Empleado</a></button>
   <br><br>
 
 </div>
@@ -61,16 +61,16 @@
 
     var msg= [[${mensaje}]];
     if (msg == "saveOK"){
-      Command : toastr["success"]("Empresa creada con éxito!")
+      Command : toastr["success"]("Empleado creado con éxito!")
     }
     else if (msg == "updateOK"){
-      Command : toastr["success"]("Empresa actualizada con éxito!")
+      Command : toastr["success"]("Empleado actualizado con éxito!")
     }
     else if (msg == "deleteOK"){
-      Command : toastr["error"]("Empresa eliminada con éxito!")
+      Command : toastr["error"]("Empleado eliminado con éxito!")
     }
     else if (msg == "deleteError"){
-      Command : toastr["error"]("Empresa no ha sido eliminada!")
+      Command : toastr["error"]("Empleado no ha sido eliminado!")
     }
     toastr.options={
       "positionClass": "toast-top-right",

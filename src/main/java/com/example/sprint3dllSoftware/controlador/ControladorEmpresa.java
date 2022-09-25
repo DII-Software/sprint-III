@@ -5,13 +5,14 @@ import com.example.sprint3dllSoftware.Servicios.ServicioImpEmpresa;
 import com.example.sprint3dllSoftware.entidades.Employee;
 import com.example.sprint3dllSoftware.entidades.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/empresa")
-@RestController
+@Controller
 
 public class ControladorEmpresa {
 
