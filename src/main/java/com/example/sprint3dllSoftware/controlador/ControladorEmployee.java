@@ -1,16 +1,15 @@
 package com.example.sprint3dllSoftware.controlador;
 
-import com.example.sprint3dllSoftware.Servicios.ServicioEmpresa;
 import com.example.sprint3dllSoftware.Servicios.ServicioImpEmployee;
 import com.example.sprint3dllSoftware.Servicios.ServicioImpEmpresa;
 import com.example.sprint3dllSoftware.entidades.Employee;
+import com.example.sprint3dllSoftware.entidades.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.example.sprint3dllSoftware.entidades.Empresa;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/employee")
 @Controller
@@ -31,8 +30,8 @@ public class ControladorEmployee {
         return sie.consultarEmployeePorId(id);
     }
 
-    @PostMapping
-    public Employee insertar(@RequestBody Employee emp){
+    @PostMapping("/GuardarEmpleado")
+    public Employee insertar(Employee emp, RedirectAttributes redirectAttributes){
         List<Empresa> empresas=servicioImpEmpresa.listarEmpresa();
         Empresa empresa=null;
         for(Empresa em:empresas){
@@ -43,7 +42,11 @@ public class ControladorEmployee {
         if(empresa!=null){
             emp.setEmpresa(empresa);
             System.out.println("Empleado a guardar: "+emp);
+            redirectAttributes.addFlashAttribute("mensaje","saveOK");
             return sie.guardarEmployee(emp);
+        }else if(empresa==null){
+            redirectAttributes.addFlashAttribute("mensaje","saveError");
+            return null;
         }
         return emp;
     }
